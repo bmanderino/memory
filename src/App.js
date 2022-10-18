@@ -56,7 +56,6 @@ const initialCardData = [
 ]
 
 const randomOrder = (dataArray, returnArray=[]) => {
-  console.log(dataArray, returnArray)
   if (dataArray.length === 0) return returnArray
   let randomIndex = Math.floor(Math.random() * (dataArray.length))
   returnArray.push(dataArray[randomIndex])
@@ -66,7 +65,7 @@ const randomOrder = (dataArray, returnArray=[]) => {
 
 export default function App() {
   //global state that keeps track of selected card id
-  const [cards, setCards] = useState(randomOrder(initialCardData))
+  const [cards, setCards] = useState(() => randomOrder(initialCardData.slice()))
   const [score, setScore] = useState(0)
 
   return (
