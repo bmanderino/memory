@@ -3,16 +3,23 @@ import React from 'react';
 
 export const Card = ({...props}) => {
   const {
+    index,
     value,
-    revealed
+    revealed,
+    handleCardClick
   } = props
 
-  const handleSelectedCard = () => {
 
+
+  if (revealed) {
+    return(
+      <div className="card face">Card {value}</div>
+    )
+  } else {
+    return(
+      <div onClick={() => handleCardClick(index,value)} className="card back"></div>
+    )
   }
 
-  return(
-    <div onClick={handleSelectedCard} className="card">Card {value}</div>
-  )
 }
 //Card.propTypes = {};
