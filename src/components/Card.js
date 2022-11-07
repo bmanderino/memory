@@ -3,21 +3,21 @@ import React from 'react';
 
 export const Card = ({...props}) => {
   const {
-    index,
+    id,
     value,
+    matched,
     revealed,
     handleCardClick
   } = props
 
 
-
-  if (revealed) {
+  if (revealed || matched) {
     return(
       <div className="card face">Card {value}</div>
     )
   } else {
     return(
-      <div onClick={() => handleCardClick(index,value)} className="card back"></div>
+      <div onClick={() => handleCardClick(id)} className="card back"></div>
     )
   }
 
