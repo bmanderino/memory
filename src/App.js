@@ -42,6 +42,7 @@ export default function App() {
   //global state that keeps track of selected card id
   const [cards, setCards] = useState(() => randomOrder(initialCardData.slice()))
   const [selectedCardIds, setSelectedCardIds] = useState([])
+  const [disabled, setDisabled] = useState(false)
 
   let revealedCards = useMemo(() => {
     return cards.map(item => {
@@ -55,6 +56,7 @@ export default function App() {
   }, [selectedCardIds])
 
   const compareCards = () => {
+    setDisabled(true)
     let card1 = cards.find(item => item.id === selectedCardIds[0])
     let card2 = cards.find(item => item.id === selectedCardIds[1])
     if (card1.value === card2.value) {
@@ -64,7 +66,10 @@ export default function App() {
       })
       setCards(updatedCards)
     }
-    setSelectedCardIds([])
+    setTimeout(() => {
+      setSelectedCardIds([])
+      setDisabled(false)
+    }, 500)
   }
 
   const handleCardClick = (cardId) => {
@@ -75,7 +80,7 @@ export default function App() {
     <div className="App">
       <div className="gameBoard">
         {revealedCards.map((item, index) => (
-          <Card value={item.value} revealed={item.revealed} matched={item.matched} key={index} id={item.id} handleCardClick={handleCardClick} />
+          <Card value={item.value} revealed={item.revealed} matched={item.matched} key={index} id={item.id} handleCardClick={() => handleCardClick(item.id)} disabled={disabled} />
         ))}
       </div>
     </div>

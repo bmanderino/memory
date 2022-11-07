@@ -7,7 +7,8 @@ export const Card = ({...props}) => {
     value,
     matched,
     revealed,
-    handleCardClick
+    handleCardClick,
+    disabled
   } = props
 
 
@@ -17,7 +18,7 @@ export const Card = ({...props}) => {
     )
   } else {
     return(
-      <div onClick={() => handleCardClick(id)} className="card back"></div>
+      <div onClick={handleCardClick} className="card back" disabled={disabled}></div>
     )
   }
 
